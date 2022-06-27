@@ -1,0 +1,17 @@
+---
+- name: Download
+  get_url:
+    url: "{{ helm_url }}"
+    dest: /tmp/get/helm.sh
+    mod: 0775
+  register: download
+
+- name: Install Helm
+  shell:
+    /tmp/get_hel.sh
+  when:
+    - download.failed|bool == false
+  register: install_helm
+
+- name:
+  debug: var=install_helm

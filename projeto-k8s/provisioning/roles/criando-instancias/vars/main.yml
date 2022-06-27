@@ -1,0 +1,10 @@
+---
+# vars file for criando-instancias
+instance_type: t2.medium
+sec_group_name: sc_ansible
+image: ami-09d56f8956ab235b3
+keypair: ansible-class
+region: us-east-1
+count: 3
+profile: ansible_profile
+#profile: aws_profile
