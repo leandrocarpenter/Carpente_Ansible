@@ -9,9 +9,69 @@
     - proto: tcp
       from_port: 22
       to_port: 22
-      to_port: 22
       cidr_ip: 0.0.0.0/0
       rule_desc: SSH
+    - proto: tcp
+      from_port: 2379
+      to_port: 2380
+      cidr_ip: 0.0.0.0/0
+      rule_desc: etcd server API
+    - proto: tcp
+      from_port: 6443
+      to_port: 6443
+      cidr_ip: 0.0.0.0/0
+      rule_desc: kube-apiserver
+    - proto: tcp
+      from_port: 10250
+      to_port: 20250
+      cidr_ip: 0.0.0.0/0
+      rule_desc: kubelet API
+    - proto: tcp
+      from_port: 10251
+      to_port: 10251
+      cidr_ip: 0.0.0.0/0
+      rule_desc: kube-scheduler
+    - proto: tcp
+      from_port: 10252
+      to_port: 10252
+      cidr_ip: 0.0.0.0/0
+      rule_desc: kube-controller-manager
+    - proto: tcp
+      from_port: 10255
+      to_port: 10255
+      cidr_ip: 0.0.0.0/0
+      rule_desc: kube API Read-only
+    - proto: tcp
+      from_port: 30000
+      to_port: 32767
+      cidr_ip: 0.0.0.0/0
+      rule_desc: NodePort Services
+    - proto: tcp
+      from_port: 6783
+      to_port: 6783
+      cidr_ip: 0.0.0.0/0
+      rule_desc: WeaveNet
+    - proto: udp
+      from_port: 6783
+      to_port: 6783
+      cidr_ip: 0.0.0.0/0
+      rule_desc: WeaveNet
+    - proto: udp
+      from_port: 6784
+      to_port: 6784
+      cidr_ip: 0.0.0.0/0
+      rule_desc: WeaveNet
+    - proto: tcp
+      from_port: 32222
+      to_port: 32222
+      cidr_ip: 0.0.0.0/0
+      rule_desc: App
+    - proto: tcp
+      from_port: 32111
+      to_port: 32111
+      cidr_ip: 0.0.0.0/0
+      rule_desc: App
+
     rules_egress:
     - proto: all
       cidr_ip: 0.0.0.0/0

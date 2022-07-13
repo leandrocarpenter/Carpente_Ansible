@@ -1,0 +1,49 @@
+- name: Install PIP
+  apt:
+    name:
+      - python-pip
+
+- name: Install Dependencias do modulo K8s
+  pip:
+    name:
+      - openshift
+      - PyYAML
+- name: Copiando o arquivo de deploy do app v1
+  template:
+    src: app-v1.yml.j2
+    dest: /opt/apps/app-v1.yml
+    owner: root
+    group: root
+    mode: 0644
+  register: copiando_deploy_app_v1
+
+- name: Copiando o arquivo de deploy do app v2
+  template:
+    src: app-v2.yml.j2
+    dest: /opt/apps/app-v2.yml
+    owner: root
+    group: root
+    mode: 0644
+  register: copiando_deploy_app_v2
+
+- name: Deploy do app v2
+  k8s:
+    state: present
+    namespace: default
+    src: /opt/App/app-v2.yml
+  
+- name: Scale down do app-v1
+  k8s:
+    state: present
+    namespace: default
+    src: /opt/App/app-v1.yml
+
+- name: Dentro de 02min o app-v1 sera removido. Pressione o control + c para cancelar
+  pause:
+    minutes: 2
+
+- name: Remover o app-v1
+  k8s:
+    state: absent
+    namespace: default
+    src: /opt/App/app-v1.yml
